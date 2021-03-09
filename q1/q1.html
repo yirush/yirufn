@@ -1,0 +1,58 @@
+<script>
+
+    let inputValue = {
+      hired: {
+        be: {
+          to: {
+              deserve: 'I'
+          }
+        }
+      }
+    };
+    
+    myobj=[];
+    mydata=demo1(inputValue,myobj);
+    console.log(mydata)//["hired", "be", "to", "deserve", "I"]
+    console.log(mydata.reverse())// 將資料反轉 ["I", "deserve", "to", "be", "hired"]
+    
+    newobj={};
+    mynewobj=demo2(mydata,newobj); //組合新物件
+    console.log(mynewobj); //印出:I:{deserve:{to:{be:{'hired'}}}}; 
+    
+    function demo2(mydata,newobj){
+        //重組新物件
+        
+        mylen=mydata.length;
+        
+        for(i=0;i<mylen;i++){
+            
+            if(i==(mylen-1)){
+                newobj += "'"+mydata[i]+"'}}}};";
+                
+            }else{
+            
+                newobj += mydata[i]+":{";
+            
+            }
+        }
+        
+        return newobj; //I:{deserve:{to:{be:{'hired'}}}}; 
+    }
+    
+    function demo1(v,myobj){
+        for(key in v){
+            console.log(key);
+            myvalue=v[key];
+            myobj.push(key);
+            if(myvalue instanceof Object){ //判斷是否為物件
+                demo1(myvalue,myobj) //如果還有資料遞迴再執行一次
+            }else{
+                myobj.push(myvalue); //先把抓到的值，先存入陣列
+            }
+            
+        }
+        
+        return myobj.reverse();// 將資料反轉 ["I", "deserve", "to", "be", "hired"]
+    }
+     
+    </script>
